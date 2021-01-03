@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ImageUpload.Models.ImageModel>
+@{
+    ViewData["Title"] = "Delete";
+    List<ImageModel> list = new List<ImageModel>();
+}
+
+<h1>Delete</h1>
+@foreach (var item in Model ?? list)
+{
+    <div>
+        <h4>ImageModel</h4>
+        <hr />
+
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ImageId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => item.ImageId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => item.Title)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ImageName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => item.ImageName)
+            </dd>
+            <dt class="col-sm-2">
+                Uploaded Image
+            </dt>
+            <dd class="col-sm-10">
+                <img src="@("~/image/" + item.ImageName)" asp-append-version="true" width="250px" height="250px" />
+            </dd>
+
+        </dl>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="@item.ImageId" />
+
+            <input asp-action="Delete"  type="submit" value="Delete" sp-route-id="@item.ImageId" class="btn btn-danger" /> |
+            <a asp-action="Index">Back to List</a>
+        </form>
+
+    </div>
+
+}
